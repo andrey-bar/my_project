@@ -1,0 +1,25 @@
+FROM php:8.3-fpm
+RUN apt-get update && apt-get install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
+    && docker-php-ext-install intl opcache pdo pdo_mysql \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip \
+
+WORKDIR /var/www/project
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN pecl install xdebug-3.4.0 && docker-php-ext-enable xdebug
+
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+RUN chown -R ${USER_ID}:${GROUP_ID} /var/www
+COPY --chown=${USER_ID}:${GROUP_ID} ./ /app
+RUN groupmod -g ${GROUP_ID} www-data && \
+    usermod -u ${USER_ID} www-data
+
+USER "${USER_ID}:${GROUP_ID}"
+
+USER www-data
+
+CMD ["php-fpm"]
