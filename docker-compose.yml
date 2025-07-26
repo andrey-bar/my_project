@@ -17,7 +17,8 @@ services:
   php:
     build:
       context: .
-      dockerfile: docker/php/Dockerfile
+      dockerfile: docker/php/Dockerfile_ms
+      target: ${APP_ENV}
     volumes:
       - .:/var/www/symfony_app
     ports:

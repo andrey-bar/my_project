@@ -40,12 +40,26 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Create Database
-      run: |
-        mkdir -p data
-        touch data/database.sqlite
+    #- name: Create Database
+    #  run: |
+    #    mkdir -p data
+    #    touch data/database.sqlite
 
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
-      run: vendor/bin/phpunit
+    #- name: Execute tests (Unit and Feature tests) via PHPUnit
+    #  env:
+    #    DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
+    #  run: vendor/bin/phpunit
+
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose-plugin
+
+    - name: Run Docker Compose
+      run: docker compose up -d # Or docker-compose up -d for older versions
+    - name: Run Tests (example)
+      run: |
+        docker compose exec php vendor/bin/phpunit
+    - name: Clean up (optional)
+      if: always()
+      run: docker compose down
