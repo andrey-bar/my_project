@@ -23,7 +23,7 @@ class CurrencyHelperTest extends TestCase
         $this->assertTrue($helper->isSame($amount1, $amount2, $amount3));
         $this->assertFalse($helper->isSame($amount1, $amount4));
         //$this->assertFalse($helper->isSame($amount1, $amount2, $amount4));
-        $this->assertFalse($helper->isSame($amount1,  $amount4));
+        $this->assertFalse($helper->isSame($amount1, $amount4));
     }
 
     public function testItReturnsNumericCode(): void
