@@ -1,0 +1,17 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+	level: 6
+	paths:
+		- src
+		- tests
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+	    - identifier: missingType.generics
+	    - '#^Function expect invoked with \d parameters?, 0 required\.$#'
+	    - '#^Constant .+ is unused\.#'
+	    - '#^Property [a-zA-Z0-9\\_]+Entity[a-zA-Z0-9\\_]+::\$id is never written, only read.#'
+	    - '#is never written, only read#'
+	    - '#Class .* has an uninitialized readonly property \$id#'
+	tmpDir: /tmp/cache/phpstan

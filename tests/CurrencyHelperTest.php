@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class CurrencyHelperTest extends TestCase
 {
-    public function testItReturnsWhetherCurrenciesAreTheSame()
+    public function testItReturnsWhetherCurrenciesAreTheSame(): void
     {
         $helper = new CurrencyHelper();
 
@@ -22,10 +22,10 @@ class CurrencyHelperTest extends TestCase
         $this->assertTrue($helper->isSame($amount1, $amount2));
         $this->assertTrue($helper->isSame($amount1, $amount2, $amount3));
         $this->assertFalse($helper->isSame($amount1, $amount4));
-        //$this->assertFalse($helper->isSame($amount1, $amount2, $amount4));
+        $this->assertFalse($helper->isSame($amount1,/* $amount2, */$amount4));
     }
 
-    public function testItReturnsNumericCode()
+    public function testItReturnsNumericCode(): void
     {
         $helper = new CurrencyHelper();
 
@@ -41,7 +41,7 @@ class CurrencyHelperTest extends TestCase
         $this->assertEquals(2.2, $sum);
     }
 
-    public function testSutractValues(): void
+    public function testSubtractValues(): void
     {
         $helper = new CurrencyHelper();
 

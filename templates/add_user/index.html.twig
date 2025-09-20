@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Create New User</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.middleName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}

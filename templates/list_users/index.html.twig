@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2>Users list</h2>
+    <a href="{{ path('app_add_user') }}">Add user</a>
+    <div>
+        <table>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.lastName }} {{ user.firstName }} {{ user.middleName }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

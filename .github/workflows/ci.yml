@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Symfony
+name: CI
 
 on:
   push:
@@ -57,9 +57,16 @@ jobs:
 
     - name: Run Docker Compose
       run: docker compose up -d # Or docker-compose up -d for older versions
+
+    - name: Run phpstan
+      run: docker compose exec php vendor/bin/phpstan analyse -c phpstan.neon
+
+    - name: Run php code sniffer
+      run: docker compose exec php vendor/bin/phpcs src tests --standard=PSR12 --warning-severity=0 -q --extensions=php
+
     - name: Run Tests (example)
-      run: |
-        docker compose exec php vendor/bin/phpunit
+      run: docker compose exec php vendor/bin/phpunit
+
     - name: Clean up (optional)
       if: always()
       run: docker compose down
