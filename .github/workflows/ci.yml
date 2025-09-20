@@ -50,18 +50,18 @@ jobs:
     #    DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
     #  run: vendor/bin/phpunit
 
-    #- name: Install Docker Compose
-    #  run: |
-    #    sudo apt-get update
-    #    sudo apt-get install -y docker-compose-plugin
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose-plugin
 
-    #- name: Run Docker Compose
-    #  run: docker compose up -d # Or docker-compose up -d for older versions
+    - name: Run Docker Compose
+      run: docker compose up -d # Or docker-compose up -d for older versions
 
-    - name: Run docker compose
-      uses: hoverkraft-tech/compose-action@v2.0.1
-      with:
-        compose-file: "./docker-compose.yml"
+    #- name: Run docker compose
+    #  uses: hoverkraft-tech/compose-action@v2.0.1
+    #  with:
+    #    compose-file: "./docker-compose.yml"
 
     - name: Run phpstan
       run: docker compose exec php vendor/bin/phpstan analyse -c phpstan.neon
