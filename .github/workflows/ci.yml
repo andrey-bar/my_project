@@ -56,7 +56,8 @@ jobs:
         sudo apt-get install -y docker-compose-plugin
 
     - name: Run Docker Compose
-      run: docker compose up -d # Or docker-compose up -d for older versions
+      run: |
+       docker compose up -d
 
     #- name: Run docker compose
     #  uses: hoverkraft-tech/compose-action@v2.0.1
